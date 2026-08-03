@@ -1,0 +1,48 @@
+# Nunca versionar: pasta com backups originais, build de produção e
+# qualquer credencial/chave privada (ver ocs-gestao/../_local-nao-versionado)
+/_local-nao-versionado/
+
+# Segredos - NUNCA versionar (SECRET do JWT, senhas de banco, etc.)
+.env
+*.env
+!.env.example
+!**/.env.example
+
+# dependências
+node_modules/
+**/node_modules/
+
+# build / cache do Angular
+/ocs-gestao/dist/
+/ocs-gestao/tmp/
+/ocs-gestao/out-tsc/
+/ocs-gestao/.angular/
+/ocs-gestao/.sass-cache/
+/ocs-gestao/connect.lock
+/ocs-gestao/coverage/
+/ocs-gestao/libpeerconnection.log
+npm-debug.log
+testem.log
+/ocs-gestao/typings/
+
+# e2e
+/ocs-gestao/e2e/*.js
+/ocs-gestao/e2e/*.map
+
+# IDEs e editores
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Sistema
+.DS_Store
+Thumbs.db

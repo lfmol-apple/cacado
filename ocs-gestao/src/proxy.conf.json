@@ -1,0 +1,9 @@
+{
+    "/api/*": {
+        "target": "https://receitaws.com.br",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug",
+        "pathRewrite": {"^/api" : "https://receitaws.com.br"}
+    }
+}

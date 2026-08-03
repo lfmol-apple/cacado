@@ -1,0 +1,85 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Cadastro de Movimentação
+                </div>
+                <p class="card-category">Cadastro de movimentação
+                </p>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <mat-accordion>
+                            <mat-expansion-panel class="panel-margin" [expanded]="this.panelOpenState" (opened)="this.panelOpenState=true">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title >
+                                 <i class="material-icons">warehouse</i> Dados Movimentação
+                                </mat-panel-title>
+                              </mat-expansion-panel-header >
+                              <div class="row">
+                                <div class="col-sm-12">
+                                    <form #form="ngForm" [formGroup]="formMovimentacao" (submit)="salvaMovimentacao()">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <mat-form-field >
+                                                    <input matInput  type="date" placeholder="Data" formControlName="Data" >
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <mat-form-field>
+                                                    <mat-label>Galpão</mat-label>
+                                                    <mat-select formControlName="IDGalpao">
+                                                        <mat-option *ngFor="let galpao of galpoes" [value]="galpao.ID"  >
+                                                        {{galpao.Nome }}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>    
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <mat-form-field>
+                                                    <mat-label>Ovos</mat-label>
+                                                    <input matInput class="number-input-lg" type="number" min="0" step="1" formControlName="QtdOvos">
+                                                    <i class="material-icons" matSuffix>egg</i> Un
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <mat-form-field>
+                                                    <mat-label>Ração</mat-label>
+                                                    <input matInput class="number-input-lg" type="number" min="0" step="0.1" formControlName="QtdRacao">
+                                                    <i class="material-icons" matSuffix>grass</i>Kg
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <mat-form-field>
+                                                    <mat-label>Mortes</mat-label>
+                                                    <input matInput class="number-input-lg" type="number" min="0" step="1" formControlName="QtdMortes">
+                                                    <i class="material-icons" matSuffix>remove</i>Un
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                              </div>
+                            </mat-expansion-panel>
+
+                          </mat-accordion>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button class="btn btn-danger" (click)="excluirCompra()" *ngIf="this.idmovimentacao > 0">Excluir</button>
+                        <button class="btn btn-default pull-right" (click)="cancelar()" >Cancelar</button>
+                        <button class="btn btn-success pull-right" (click)="salvaMovimentacao()">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

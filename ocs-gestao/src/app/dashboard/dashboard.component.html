@@ -1,0 +1,148 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">add_business</i>
+                      </div>
+                      <p class="card-category">Vendas em {{mesAtual}}</p>
+                      <h3 class="card-title">{{vendasMesAtual?.NumVendas}}
+                          <small></small>
+                      </h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">warning</i>
+                          vendas realizadas em {{mesAtual}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">add</i>
+                      </div>
+                      <p class="card-category">Receitas {{mesAtual}}</p>
+                      <h3 class="card-title">R$ {{vendasMesAtual?.ValorVendas}}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">attach_money</i>Receitas
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">shopping_cart</i>
+                      </div>
+                      <p class="card-category">Compras em {{mesAtual}}</p>
+                      <h3 class="card-title">{{ComprasMesAtual.NumCompras}}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">local_offer</i> Compras em {{mesAtual}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">remove</i>
+                    </div>
+                    <p class="card-category">Despesas {{mesAtual}}</p>
+                      <h3 class="card-title">R$ {{ComprasMesAtual.ValorCompras}}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">attach_money</i> Despesas
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+            <div class="col-md-12">
+                <div class="card card-chart">
+                    <div class="card-header card-header-warning">
+                        <div class="ct-chart" id="websiteViewsChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Evolução diária</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <!-- <i class="material-icons">access_time</i> campaign sent 2 days ago -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="row">
+          <div class="col-md-6">
+              <div class="card card-chart">
+                  <div class="card-header card-header-success">
+                      <div class="ct-chart" id="dailySalesChart"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Vendas da Semana</h4>
+                      <p class="card-category">
+                          <!-- <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p> -->
+                      </p>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <!-- <i class="material-icons">access_time</i> updated 4 minutes ago -->
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="card card-chart">
+                  <div class="card-header card-header-danger">
+                      <div class="ct-chart" id="completedTasksChart"></div>
+                  </div>
+                  <div class="card-body">
+                      <h4 class="card-title">Compras da Semana</h4>
+                      <p class="card-category">
+                        <!-- Last Campaign Performance -->
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <!-- <i class="material-icons">access_time</i> campaign sent 2 days ago -->
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <div class="card card-chart">
+                <div class="card-header card-header-primary">
+                    <div class="ct-chart" id="producaoDiariaOvos"></div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Produção de Ovos</h4>
+                    <p class="card-category"></p>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <!-- <i class="material-icons">access_time</i> campaign sent 2 days ago -->
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+
+  </div>
+</div>

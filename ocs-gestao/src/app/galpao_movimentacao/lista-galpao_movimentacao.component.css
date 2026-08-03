@@ -1,0 +1,44 @@
+.header-background{
+    background-color: brown;
+}
+.panel-margin{
+    margin: 15px;
+}
+.display-hide{
+    display: none;
+}
+.edit-movimentacao{
+    font-size: 36px;
+    cursor: pointer; 
+}
+
+tfoot{
+    font-weight: bold;
+    font-size: large;
+}
+
+.logo{
+    max-width: 100px;
+}
+
+.print-header{
+    display: none;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+@media print {
+    .no-print{
+        display: none;
+    }
+    .print-header{
+        display: block;
+    }
+    .card-title .card-category{
+        color: black !important;
+        font-weight: bold;
+    }
+    /* .table ,th, td,tr {
+        border: 1px solid black !important;
+        border-collapse: collapse;
+    } */
+}

@@ -1,0 +1,169 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Movimentações
+                  <button mat-raised-button class="btn btn-danger pull-right btn-sm" (click)="novaMovimentacao()"><i class="material-icons">add</i>Nova</button>
+                </div>
+                <p class="card-category">Cadastro de Movimentacões
+                </p>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <hr>
+                        <mat-accordion>
+                            <mat-expansion-panel class="panel-margin" [expanded]="this.panelOpenState" (opened)="this.panelOpenState=true">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title >
+                                  Filtros
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  
+                                </mat-panel-description>
+                              </mat-expansion-panel-header >
+                                <form #form="ngForm" [formGroup]="formFiltroMovimentacao" (submit)="filtraMovimentacoes()">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <mat-form-field >
+                                                <input matInput type="date" placeholder="De" formControlName="PeriodoDe" >
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <mat-form-field >
+                                                <input matInput type="date" placeholder="Até" formControlName="PeriodoAte" >
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6"                              >
+                                            <mat-form-field>
+                                                <mat-label>Tipo de Movimentacao</mat-label>
+                                                <mat-select formControlName="IDTipo_Movimentacao">
+                                                    <mat-option  [value]="">Todos</mat-option>
+                                                    <mat-option *ngFor="let tipo_movimentacao of tipos_movimentacao" [value]="tipo_movimentacao.ID"  >
+                                                    {{tipo_movimentacao.Nome }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>                                                 
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <mat-form-field>
+                                                <mat-label>Conferido</mat-label>
+                                                <mat-select formControlName="Status">
+                                                    <mat-option value="">Ambos</mat-option>
+                                                    <mat-option value="false">Conferido</mat-option>
+                                                    <mat-option value="true">Não Conferido </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>                                                 
+                                        </div>                     
+                                    </div>
+                                    <div class="row">
+                                     
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success pull-right"> Filtrar</button>
+                                            <button type="reset" class="btn btn-default pull-right"> Limpar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                        <hr>
+                        <div class="card-content table-responsive table-full-width">
+                            <table class="table">
+                              <thead class="text-danger">
+                                <th>Conferido</th>
+                                <th>Data</th>
+                                <th>Tipo</th>
+                                <th class="d-none d-sm-block">Observações</th>
+                                <th>Usuario</th>
+                                <th>Valor</th>
+                                <th>Editar</th>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let movimentacao of Movimentacoes">
+                                    <td>
+                                        <mat-slide-toggle [checked]=false [disabled]="disabled" *ngIf="movimentacao.Conferido?.data[0]==0 || !movimentacao.Conferido" (click)="toggleConferido(movimentacao.ID)"></mat-slide-toggle>    
+                                        <mat-slide-toggle [checked]=true [disabled]="disabled" *ngIf="movimentacao.Conferido?.data[0]==1" (click)="toggleConferido(movimentacao.ID)"></mat-slide-toggle>    
+                                    </td>
+                                    <td>{{movimentacao.DtCadastro | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{movimentacao.NomeTipoMovimentacao}}</td>
+                                    <td class="d-none d-sm-block">{{movimentacao.Observacoes}}</td>
+                                    <td>{{movimentacao.NomeUsuCadastro}}</td>
+                                    <td>{{movimentacao.Valor}}</td>
+                                    <td (click)="editaMovimentacao(movimentacao.ID)" ><i class="material-icons edit-venda">edit_note</i></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 pull-right">
+                        <div class="card card-stats ">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">payments</i>
+                                </div>
+                                <p class="card-category">Créditos</p>
+                                <h3 class="card-title">
+                                    <small>R$</small>
+                                    {{this.Credito}}
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons text-info">attach_money</i>
+                                    <a href="javascript:void(0)">Movimentacões de crédito</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                     
+                    <div class="col-lg-4 col-md-4 col-sm-6 pull-right">
+                        <div class="card card-stats ">
+                            <div class="card-header card-header-danger card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">payments</i>
+                                </div>
+                                <p class="card-category">Débitos</p>
+                                <h3 class="card-title">
+                                    <small>R$</small>
+                                    {{this.Debito}}
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons text-danger">attach_money</i>
+                                    <a href="javascript:void(0)">movimentações de Débito</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                     
+                    <div class="col-lg-4 col-md-4 col-sm-6 pull-right">
+                        <div class="card card-stats ">
+                            <div class="card-header card-header-success card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">payments</i>
+                                </div>
+                                <p class="card-category">Total</p>
+                                <h3 class="card-title">
+                                    <small>R$</small>
+                                    {{this.Total}}
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons text-success">attach_money</i>
+                                    <a href="javascript:void(0)">Total das Movimentacoes</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

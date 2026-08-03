@@ -1,0 +1,10 @@
+.edit{
+    font-size: 36px;
+    cursor: pointer; 
+}
+.display-hide{
+    display: none;
+}
+.panel-margin{
+    margin: 15px;
+}

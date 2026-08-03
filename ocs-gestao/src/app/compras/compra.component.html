@@ -1,0 +1,221 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Compra
+                </div>
+                <p class="card-category">Cadastro de compras
+                </p>
+            </div>
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <mat-accordion>
+                            <mat-expansion-panel class="panel-margin" [expanded]="this.panelOpenState" (opened)="this.panelOpenState=true">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title >
+                                 <i class="material-icons">person</i> Dados
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  <span *ngIf="this.formCompra.value.Fornecedor">Fornecedor: </span> {{this.formCompra.value.Fornecedor?.Nome}}
+                                </mat-panel-description>
+                              </mat-expansion-panel-header >
+                              <div class="row">
+                                <div class="col-sm-12">
+                                    <form #form="ngForm" [formGroup]="formCompra" (submit)="salvaCompra()">
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                                <mat-form-field >
+                                                    <input matInput type="date" placeholder="Data" formControlName="Data" >
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <mat-form-field >
+                                                    <input matInput type="text" placeholder="Fornecedor" formControlName="Fornecedor"  [matAutocomplete]="auto">
+                                                </mat-form-field>
+                                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFornecedorFn">
+                                                    <mat-option *ngFor="let fornecedor of (FornecedoresFiltrados | async)" [value]="fornecedor">
+                                                    <span>{{fornecedor.Nome}}</span>
+                                                    </mat-option>
+                                                </mat-autocomplete>                                                 
+                                            </div>                                            
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <mat-form-field>
+                                                    <mat-label>Tipo de Documento</mat-label>
+                                                    <mat-select formControlName="IDTipo_Documento">
+                                                      <mat-option *ngFor="let tipo_documento of tipos_Documento" [value]="tipo_documento.ID"  >
+                                                        {{tipo_documento.Nome }}
+                                                      </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>                                                 
+                                            </div>
+                                            <div class="col-md-6">
+                                                <mat-form-field >
+                                                    <input matInput type="text" placeholder="Número do Documento" formControlName="NumDocumento">
+                                                </mat-form-field>
+                                            </div>
+    
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <mat-form-field >
+                                                    <input matInput type="date" placeholder="Data de Vencimento" formControlName="DataVencimento" >
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <mat-form-field >
+                                                    <input matInput type="date" placeholder="Data de Pagamento" formControlName="DataPagamento" >
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <mat-form-field>
+                                                    <mat-label>Forma de Pagamento</mat-label>
+                                                    <mat-select formControlName="IDForma_Pagamento">
+                                                        <mat-option *ngFor="let forma_pagamento of formas_Pagamento" [value]="forma_pagamento.ID"  >
+                                                        {{forma_pagamento.Nome }}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>    
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <mat-form-field >
+                                                    <input matInput type="number" placeholder="Valor dos Insumos" formControlName="ValorPago" >
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <mat-form-field >
+                                                    <textarea matInput placeholder="Observações" formControlName="Obs"></textarea>
+                                                </mat-form-field>                         
+                                            </div>
+                                        </div>
+                    
+                                    </form>
+                                </div>
+                              </div>
+                            </mat-expansion-panel>
+                            <mat-expansion-panel class="panel-margin" >
+                                <mat-expansion-panel-header>
+                                  <mat-panel-title >
+                                    <i class="material-icons">shopping_cart</i> Itens
+                                  </mat-panel-title>
+                                  <mat-panel-description>
+                                     <span> Nº itens:</span> {{this.itens_Compra?.length}}
+                                  </mat-panel-description>
+                                </mat-expansion-panel-header >
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-block btn-success" id="btnAdicionar" (click)="btnAdicionarClick()">Adicionar</button>
+                                        <div class="row display-hide" id="panelAddItem">
+                                            <form #form="ngForm" [formGroup]="formItens" (submit)="btnSalvaInsumoClick()">
+                                                <div class="col-sm-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <mat-form-field >
+                                                                <input matInput type="text" placeholder="Insumo" formControlName="Insumo"  [matAutocomplete]="autoInsumo" autofocus id="inputInsumo">
+                                                            </mat-form-field>
+                                                            <mat-autocomplete #autoInsumo="matAutocomplete" [displayWith]="displayInsumoFn">
+                                                                <mat-option *ngFor="let insumo of (InsumosFiltrados | async)" [value]="insumo">
+                                                                <span>{{insumo.Nome}}</span>
+                                                                </mat-option>
+                                                            </mat-autocomplete>                                                 
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <mat-form-field >
+                                                                <input matInput type="text" placeholder="Unidade Medida" formControlName="UnidadeMedida">
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <mat-form-field >
+                                                                <input matInput type="number" min="0" placeholder="Valor Unitário" formControlName="ValorUnitario">
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <mat-form-field >
+                                                                <input matInput type="number" min="0" placeholder="Quantidade" formControlName="Quantidade">
+                                                            </mat-form-field>
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <mat-form-field >
+                                                                <input matInput type="number" min="0" placeholder="Valor Total" formControlName="ValorTotal">
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <button class="btn btn-success pull-right">Salvar</button>
+                                                            <button class="btn btn-default pull-right" (click)="btnCancelarItemClick()">Cancelar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-content table-responsive table-full-width">
+                                    <table class="table">
+                                      <thead class="text-danger">
+                                        <th>Insumo</th>
+                                        <th>Quantidade</th>
+                                        <th>Vl. Unitario</th>
+                                        <th>Vl. Total</th>
+                                        <th>Excluir</th>
+                                      </thead>
+                                      <tbody>
+                                        <tr *ngFor="let item of itens_Compra">
+                                          <td>{{item.NomeInsumo}}</td>
+                                          <td>{{item.Quantidade}}</td>
+                                          <td>{{item.ValorUnitario}}</td>
+                                          <td>{{item.ValorTotal}}</td>
+                                          <td (click)="excluirItem(item.ID)" ><i class="material-icons edit-compra">delete</i></td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                </div>                                 
+                              </mat-expansion-panel>
+                          </mat-accordion>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-warning card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">payments</i>
+                                </div>
+                                <p class="card-category">Valor dos Insumos</p>
+                                <h3 class="card-title">
+                                    <small>R$</small>
+                                    {{this.totalCompra}}
+                                </h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="material-icons text-warning">attach_money</i>
+                                    <a href="javascript:void(0)">Total dos insumos Adicionados</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+          
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <button class="btn btn-danger" (click)="excluirCompra()" *ngIf="this.idcompra > 0">Excluir</button>
+                        <button class="btn btn-default pull-right" (click)="cancelar()" >Cancelar</button>
+                        <button class="btn btn-success pull-right" (click)="salvaCompra()">Salvar Compra</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

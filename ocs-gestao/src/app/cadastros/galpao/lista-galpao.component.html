@@ -1,0 +1,66 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Galpões
+                  <button mat-raised-button id="btnNovo"class="btn btn-danger pull-right btn-sm" (click)="NovoGalpao()"><i class="material-icons">add</i>Novo</button>
+                </div>
+                <p class="card-category">Cadastro de Galpões
+                </p>
+            </div>
+            <div id="listaGalpoes" class="card-content table-responsive table-full-width">
+                <table class="table">
+                  <thead class="text-danger">
+                    <th>Nome</th>
+                    <th>Editar</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let galpao of galpoes">
+                      <td>{{galpao.Nome}}</td>
+                      <td (click)="editaGalpao(galpao)" ><i class="material-icons edit-galpao">edit_note</i></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <div id="editGalpoes" class="display-hide panel-margin">
+                <form #form="ngForm" [formGroup]="formGalpao" (submit)="salvaGalpao()">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <mat-form-field>
+                                <input matInput type="text" placeholder="Nome" formControlName="Nome">
+                                <mat-error *ngIf="this.formGalpao.get('Nome').errors?.required && form.submitted">informe um nome para o grupo de usuários</mat-error>
+                            </mat-form-field>   
+                       </div>
+                       <div class="col-sm-2">
+                        <mat-form-field>
+                            <input matInput type="number" min="0" placeholder="Aves" formControlName="NumAves">
+                            <mat-error *ngIf="this.formGalpao.get('NumAves').errors?.required && form.submitted">informe o Número de Aves do Galpão</mat-error>
+                        </mat-form-field>   
+                        </div>  
+    
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" value="1" formControlName="Ativo">
+                                    Ativo
+                                    <span class="form-check-sign">
+                                        <span class="check"></span>
+                                    </span>
+                                </label>
+                            </div>    
+                        </div>  
+                    </div>         
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-right" (click)="cancelaEdit()">Cancelar</button>
+                            <button type="submit" class="btn btn-success pull-right">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>

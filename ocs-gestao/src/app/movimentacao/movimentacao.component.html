@@ -1,0 +1,59 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Movimentação
+                </div>
+                <p class="card-category">Cadastro de Movimentacão
+                </p>
+            </div>
+            <div class="card-body ">
+                <form #form="ngForm" [formGroup]="formMovimentacao" (submit)="salvaMovimentacao()">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <mat-form-field >
+                                <input matInput type="date" placeholder="Data" formControlName="DtCadastro">
+                                <mat-error *ngIf="this.formMovimentacao.get('DtCadastro').errors?.required && form.submitted">Informe a data da Movimentação</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <mat-form-field>
+                                <mat-label>Tipo de Movimentação</mat-label>
+                                <mat-select formControlName="IDTipo_Movimentacao">
+                                  <mat-option *ngFor="let tipo_movimentacao of tipos_movimentacao" [value]="tipo_movimentacao.ID"  >
+                                    {{tipo_movimentacao.Nome}}
+                                  </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="this.formMovimentacao.get('IDTipo_Movimentacao').errors?.required && form.submitted">Informe o tipo de Movimentação</mat-error>
+                            </mat-form-field>                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <mat-form-field >
+                                <textarea matInput placeholder="Observações" formControlName="Observacoes"></textarea>
+                            </mat-form-field>                         
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <mat-form-field>
+                                <input matInput type="number" min="0" placeholder="Valor" formControlName="Valor">
+                                <mat-error *ngIf="this.formMovimentacao.get('Valor').errors?.required && form.submitted">Informe o valor da Movimentação</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                            <button type="button" class="btn btn-white" (click)="cancelar()">Cancelar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>

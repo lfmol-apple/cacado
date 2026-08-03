@@ -1,0 +1,91 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Grupos de Usuários
+                  <button mat-raised-button id="btnNovo"class="btn btn-danger pull-right btn-sm" (click)="NovoGrupoUsuarios()"><i class="material-icons">add</i>Novo</button>
+                </div>
+                <p class="card-category">Cadastro de Grupos de Usuários
+                </p>
+            </div>
+            <div id="listaGruposUsuarios" class="card-content table-responsive table-full-width">
+                <table class="table">
+                  <thead class="text-danger">
+                    <th>Nome</th>
+                    <th>Editar</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let grupo of grupos_usuarios">
+                      <td>{{grupo.Nome}}</td>
+                      <td (click)="editaGrupoUsuarios(grupo)" ><i class="material-icons edit-grupo">edit_note</i></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+            <div id="editGrupoUsuarios" class="display-hide panel-margin">
+                <form #form="ngForm" [formGroup]="formGrupoUsuarios" (submit)="salvaGrupoUsuarios()">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <mat-form-field>
+                                <input matInput type="text" placeholder="Nome" formControlName="Nome">
+                                <mat-error *ngIf="this.formGrupoUsuarios.get('Nome').errors?.required && form.submitted">informe um nome para o grupo de usuários</mat-error>
+                            </mat-form-field>   
+                       </div>
+                       <div class="col-sm-2">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" value="1" formControlName="Ativo">
+                                Ativo
+                                <span class="form-check-sign">
+                                    <span class="check"></span>
+                                </span>
+                            </label>
+                        </div>    
+                    </div>                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-default pull-right" (click)="cancelaEdit()">Cancelar</button>
+                            <button type="submit" class="btn btn-success pull-right">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row" *ngIf="this.idGrupoUsuarios != -1">
+                    <div class="col-sm-12">
+                        <mat-accordion>
+                            <mat-expansion-panel class="panel-margin" >
+                              <mat-expansion-panel-header>
+                                <mat-panel-title >
+                                  Permissões
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  
+                                </mat-panel-description>
+                              </mat-expansion-panel-header >
+
+                                <div class="card-content table-responsive table-full-width">
+                                    <table class="table">
+                                    <thead class="text-danger">
+                                        <th>Tela</th>
+                                        <th>Permissão</th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let rota of Rotas">
+                                        <td>{{rota.title}}</td>
+                                        <td>
+                                            <mat-slide-toggle [checked]=false [disabled]="disabled" *ngIf="rota.Enabled.data[0]==0" (click)="toogglePermissao(this.idGrupoUsuarios,rota.ID)"></mat-slide-toggle>    
+                                            <mat-slide-toggle [checked]=true [disabled]="disabled" *ngIf="rota.Enabled.data[0] ==1" (click)="toogglePermissao(this.idGrupoUsuarios,rota.ID)" ></mat-slide-toggle>    
+                                        </td>
+                                            </tr>
+                                    </tbody>
+                                    </table>
+                                </div>                              
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

@@ -1,0 +1,35 @@
+<div class="wrapper fadeInDown">
+
+        <div id="formContent">
+        <!-- Tabs Titles -->
+    
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <i class="material-icons icon-large">
+                person
+            </i>
+        </div>
+    
+        <!-- Login Form -->
+        <form #form="ngForm" [formGroup]="loginForm" (submit)="login()">
+            <input type="text" id="login" formControlName="login"  class="fadeIn second" name="login" placeholder="login">
+            <ocs-vmessage
+                *ngIf="loginForm.get('login').errors?.required && form.submitted"
+                text = "Informe o login"
+            ></ocs-vmessage>            
+            <input type="password" id="password" formControlName="senha" class="fadeIn third" name="login" placeholder="senha">
+            <ocs-vmessage
+                *ngIf="loginForm.get('senha').errors?.required && form.submitted"
+                text = "Senha inválida"
+            ></ocs-vmessage>            
+            <input type="submit" class="fadeIn fourth" value="Entrar">
+        </form>
+    
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+    
+        </div>
+    
+        </div>
+
+</div>

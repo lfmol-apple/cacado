@@ -1,0 +1,99 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="print-header">
+                <img class="logo" src="..\..\assets\img\logo.webp">
+            </div>
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Movimentações Galpão
+                  <button mat-raised-button class="btn btn-default pull-right btn-sm no-print" (click)="imprimir()"><i class="material-icons">print</i></button>
+                  <button mat-raised-button class="btn btn-danger pull-right btn-sm no-print" (click)="novaMovimentacao()"><i class="material-icons">add</i>Nova</button>
+                </div>
+                <p class="card-category">Movimentações dos Galpões
+                </p>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <hr class="no-print">
+                        <mat-accordion class="no-print">
+                            <mat-expansion-panel class="panel-margin" [expanded]="this.panelOpenState" (opened)="this.panelOpenState=true">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title >
+                                  Filtros
+                                </mat-panel-title>
+                                <mat-panel-description>
+                                  
+                                </mat-panel-description>
+                              </mat-expansion-panel-header >
+                                <form #form="ngForm" [formGroup]="formFiltroMov" (submit)="filtraMovimentacoes()">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <mat-form-field >
+                                                <input matInput type="date" placeholder="De" formControlName="PeriodoDe" >
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <mat-form-field >
+                                                <input matInput type="date" placeholder="Até" formControlName="PeriodoAte" >
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-md-8"                              >
+                                            <mat-form-field>
+                                                <mat-label>Galpao</mat-label>
+                                                <mat-select formControlName="Galpao">
+                                                    <mat-option [value]="-1">Todos</mat-option>
+                                                    <mat-option *ngFor="let galpao of galpoes" [value]="galpao.ID"  >
+                                                    {{galpao.Nome }}
+                                                  </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>                                                 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success pull-right"> Filtrar</button>
+                                            <button type="reset" class="btn btn-default pull-right"> Limpar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                        <hr class="no-print">
+                        <div class="card-content table-responsive table-full-width">
+                            <table class="table">
+                              <thead class="text-danger">
+                                <th>Data</th>
+                                <th>Glapão</th>
+                                <th>Ovos</th>
+                                <th>Ração</th>
+                                <th>Mortes</th>
+                                <th class="no-print">Editar</th>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let mov of movimentacoes">
+                                  <td>{{mov.Data | date: 'dd/MM/yyyy'}}</td>
+                                  <td>{{mov.Galpao}}</td>
+                                  <td>{{mov.QtdOvos}}</td>
+                                  <td>{{mov.QtdRacao}}</td>
+                                  <td>{{mov.QtdMortes}}</td>
+                                  <td (click)="editaMov(mov.ID)" class="no-print"><i class="material-icons edit-movimentacao">edit_note</i></td>
+                                </tr>
+                              </tbody>
+                              <tfoot>
+                                <tr>
+                                    <th colspan="2">Totais</th>
+                                    <td>{{this.totais?.TotalOvos}}</td>
+                                    <td>{{this.totais?.TotalRacao}}</td>
+                                    <td>{{this.totais?.TotalMortes}}</td>
+                                </tr>
+                              </tfoot>
+                            </table>
+                        </div>                        
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>

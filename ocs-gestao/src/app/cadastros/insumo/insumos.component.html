@@ -1,0 +1,30 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Insumos
+                  <button mat-raised-button class="btn btn-danger pull-right btn-sm" (click)="novoInsumo()"><i class="material-icons">add</i>Novo</button>
+                </div>
+                <p class="card-category">Cadastro de Insumos
+                </p>
+            </div>
+            <div class="card-content table-responsive table-full-width">
+                <table class="table">
+                  <thead class="text-danger">
+                    <th>Nome</th>
+                    <th>Unidade Medida</th>
+                    <th>Editar</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let insumo of Insumos">
+                      <td>{{insumo.Nome}}</td>
+                      <td>{{insumo.NomeUnidadeMedida}}</td>
+                      <td (click)="editaInsumo(insumo.ID)" ><i class="material-icons edit-insumo">edit_note</i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+    </div>
+  </div>

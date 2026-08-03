@@ -1,0 +1,91 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Cadastros auxiliares
+                </div>
+                <p class="card-category">Cadastro de dados auxiliares
+                </p>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- TIPOS DE MOVIMENTACAO -->
+                        <div class="main-content">
+                            <div class="container-fluid">
+                                <div class="card">
+                                    <div class="card-header card-header-info">
+                                        <div class="card-title">
+                                          Tipos de Movimentacao
+                                          <button mat-raised-button class="btn btn-info pull-right btn-sm" (click)="novoTipoMovimentacao()" id="btnNovoTipoMovimentacao"><i class="material-icons">add</i>Novo</button>
+                                        </div>
+                                        <p class="card-category"></p>
+                                    </div>
+                                    <div class="card-content">
+                                        <div id="listaTiposMovimentacao" class="table-responsive table-full-width">
+                                            <table class="table">
+                                              <thead class="text-info">
+                                                <th>Nome</th>
+                                                <th>Tipo</th>
+                                                <th>Editar</th>
+                                              </thead>
+                                              <tbody>
+                                                <tr *ngFor="let tipo_movimentacao of TiposMovimentacao">
+                                                  <td>{{tipo_movimentacao.Nome}}</td>
+                                                  <td>{{tipo_movimentacao.Credito.data == 0?'Débito':'Crédito'}}</td>
+                                                  <td (click)="editaTipoMovimentacao(tipo_movimentacao)" ><i class="material-icons edit">edit_note</i></td>
+                                                </tr>
+                                              </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="edtiTipoMovimentacao" class="display-hide panel-margin">
+                                            <form #form="ngForm" [formGroup]="formTipoMovimentacao" (submit)="salvaTipoMovimentacao()">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <mat-form-field>
+                                                            <input matInput type="text" placeholder="Nome" formControlName="Nome">
+                                                            <mat-error *ngIf="this.formTipoMovimentacao.get('Nome').errors?.required && form.submitted">informe um nome para o tipo de Movimentacao</mat-error>
+                                                            <mat-error *ngIf="this.formTipoMovimentacao.get('Nome').errors?.tipoMovimentacaoExists">Já existe tipo de movimentação cadastrada com este nome</mat-error>
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <mat-form-field>
+                                                            <mat-label>Tipo</mat-label>
+                                                            <mat-select formControlName="Credito">
+                                                                <mat-option [value]="false">Débito</mat-option>
+                                                                <mat-option [value]="true">Crédito</mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>                                                 
+                                                            
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <div class="form-check">
+                                                            <label class="form-check-label">
+                                                                <input class="form-check-input" type="checkbox" value="1" formControlName="Ativo">
+                                                                Ativo
+                                                                <span class="form-check-sign">
+                                                                    <span class="check"></span>
+                                                                </span>
+                                                            </label>
+                                                        </div>    
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <button type="button" class="btn btn-default pull-right" (click)="cancelaTipoMovimentacao()">Cancelar</button>
+                                                        <button type="submit" class="btn btn-success pull-right">Salvar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

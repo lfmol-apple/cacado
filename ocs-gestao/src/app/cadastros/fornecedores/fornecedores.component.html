@@ -1,0 +1,30 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Fornecedores
+                  <button mat-raised-button class="btn btn-danger pull-right btn-sm" (click)="novoFornecedor()"><i class="material-icons">add</i>Novo</button>
+                </div>
+                <p class="card-category">Cadastro de Fornecedores
+                </p>
+            </div>
+            <div class="card-content table-responsive table-full-width">
+                <table class="table">
+                  <thead class="text-danger">
+                    <th>Documento</th>
+                    <th>Nome</th>
+                    <th>Editar</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let fornecedor of Fornecedores">
+                      <td>{{fornecedor.NumDoc}}</td>
+                      <td>{{fornecedor.Nome}}</td>
+                      <td (click)="editaFornecedor(fornecedor.ID)" ><i class="material-icons edit-fornecedor">edit_note</i></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>

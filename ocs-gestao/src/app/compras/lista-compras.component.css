@@ -1,0 +1,13 @@
+.header-background{
+    background-color: brown;
+}
+.panel-margin{
+    margin: 15px;
+}
+.display-hide{
+    display: none;
+}
+.edit-compra{
+    font-size: 36px;
+    cursor: pointer; 
+}

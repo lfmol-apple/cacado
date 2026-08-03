@@ -1,0 +1,30 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-danger">
+                <div class="card-title">
+                  Produtos
+                  <button mat-raised-button class="btn btn-danger pull-right btn-sm" (click)="novoProduto()"><i class="material-icons">add</i>Novo</button>
+                </div>
+                <p class="card-category">Cadastro de Produtos
+                </p>
+            </div>
+            <div class="card-content table-responsive table-full-width">
+                <table class="table">
+                  <thead class="text-danger">
+                    <th>Nome</th>
+                    <th>Unidade Medida</th>
+                    <th>Editar</th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let produto of Produtos">
+                      <td>{{produto.Nome}}</td>
+                      <td>{{produto.NomeUnidadeMedida}}</td>
+                      <td (click)="editaProduto(produto.ID)" ><i class="material-icons edit-produto">edit_note</i></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+    </div>
+  </div>
