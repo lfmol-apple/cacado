@@ -1,6 +1,19 @@
 import app from "./src/app.js"
+import express from "express";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
 const port = 21007;
+
+// Em produção o build do Angular (ocs-gestao/dist) é servido pelo mesmo
+// processo, no mesmo domínio da API — evita CORS e mantém a arquitetura
+// original (rotas de API e assets estáticos não colidem).
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const distPath = path.join(__dirname, "..", "dist");
+if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
+}
 
 // Rede de segurança: loga qualquer erro que escape dos try/catch e das
 // promises tratadas nos controllers, mas mantém o processo no ar em vez

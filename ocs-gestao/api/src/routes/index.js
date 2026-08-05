@@ -19,7 +19,9 @@ import dashboard from "./dashboardRoutes.js"
 import galpao from "./galpaoRouter.js";
 import galpao_movimentacao from "./galpao_movimentacaoRoutes.js"
 const routes = (app) =>{
-    app.route('/').get((req,res) =>{
+    // Movido de '/' para não brigar com o index.html do build Angular,
+    // que é servido na raiz pelo mesmo processo em produção.
+    app.route('/api-status').get((req,res) =>{
         res.status(200).send({titulo:"API OCS Gestão"})
     })
 

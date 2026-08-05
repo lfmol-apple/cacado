@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://apicaipira.kinghost.net:21007/'
+  apiUrl: 'https://caipiradagema27.com.br/'
 };
